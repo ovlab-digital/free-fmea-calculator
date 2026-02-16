@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=794">
+  <title>V-Lab Digital - FMEA Voorbeelden</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: system-ui, -apple-system, sans-serif; 
+      background: #F8FAFC; 
+      padding: 40px;
+      width: 794px;
+      margin: 0 auto;
+    }
+    .banner {
+      background: #0a0f1a;
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .banner-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .banner-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.2);
+    }
+    .banner-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.02em;
+    }
+    .banner-slogan {
+      font-size: 11px;
+      color: #14b8a6;
+      letter-spacing: 0.05em;
+    }
+    .banner-tag {
+      background: rgba(20, 184, 166, 0.15);
+      border: 1px solid rgba(20, 184, 166, 0.3);
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #14b8a6;
+      letter-spacing: 0.05em;
+    }
+    .doc-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .doc-title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 8px;
+    }
+    .doc-title p {
+      font-size: 14px;
+      color: #64748B;
+    }
+    .legend {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .legend-item label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748B;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .legend-item span {
+      font-size: 12px;
+      color: #0F172A;
+    }
+    .ap-badges { display: flex; gap: 8px; margin-top: 4px; }
+    .ap-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .ap-high { background: #FEE2E2; color: #DC2626; }
+    .ap-medium { background: #FEF3C7; color: #D97706; }
+    .ap-low { background: #D1FAE5; color: #059669; }
+    .section { margin-bottom: 32px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .section-bar {
+      width: 8px;
+      height: 28px;
+      border-radius: 4px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .example {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      border-left: 4px solid;
+    }
+    .example-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .example-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0F172A;
+    }
+    .example-desc {
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 4px;
+    }
+    .example-scores {
+      display: flex;
+      gap: 8px;
+    }
+    .score-box {
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    .score-box.rpn { background: #F1F5F9; }
+    .score-box label {
+      font-size: 10px;
+      color: #64748B;
+      font-weight: 600;
+      display: block;
+    }
+    .score-box .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .score-box.ap .value { font-size: 14px; }
+    .sod-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .sod-item {
+      background: #F8FAFC;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .sod-item label {
+      font-size: 9px;
+      color: #94A3B8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+    }
+    .sod-item .value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+    .sod-item .desc {
+      font-size: 10px;
+      color: #64748B;
+    }
+    .footer {
+      margin-top: 32px;
+      padding: 14px 20px;
+      background: #0a0f1a;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.15);
+    }
+    .footer-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+    .footer-slogan {
+      font-size: 10px;
+      color: #14b8a6;
+    }
+    .footer-right {
+      text-align: right;
+    }
+    .footer-right div:first-child {
+      font-size: 11px;
+      color: #94A3B8;
+    }
+    .footer-right div:last-child {
+      font-size: 10px;
+      color: #64748B;
+      margin-top: 2px;
+    }
+    @media print {
+      body { padding: 20px; }
+      .example { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="banner">
+    <div class="banner-left">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="48" height="48" style="flex-shrink:0;border-radius:8px;">
+        <defs><linearGradient id="vg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ffffff"/><stop offset="100%" style="stop-color:#14b8a6"/>
+        </linearGradient></defs>
+        <rect width="800" height="800" fill="#0a0f1a"/>
+        <path d="M150 150 L400 650 L650 150 L550 150 L400 450 L250 150 Z" fill="url(#vg)"/>
+      </svg>
+      <div class="banner-divider"></div>
+      <div>
+        <div class="banner-name">V-LAB DIGITAL</div>
+        <div class="banner-slogan">Smart Manufacturing Solutions</div>
+      </div>
+    </div>
+    <div class="banner-tag">AIAG-VDA 2019</div>
+  </div>
+
+  <!-- Title -->
+  <div class="doc-title">
+    <h1>FMEA Voorbeelden</h1>
+    <p>RPN & Action Priority referentiegids met praktijkvoorbeelden</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <label>SEVERITY (S)</label>
+      <span>Ernst van het effect<br>1 = Geen | 10 = Fataal</span>
+    </div>
+    <div class="legend-item">
+      <label>OCCURRENCE (O)</label>
+      <span>Frequentie van oorzaak<br>1 = Onwaarschijnlijk | 10 = Continu</span>
+    </div>
+    <div class="legend-item">
+      <label>DETECTION (D)</label>
+      <span>Detecteerbaarheid<br>1 = Zeker | 10 = Onmogelijk</span>
+    </div>
+    <div class="legend-item">
+      <label>ACTION PRIORITY</label>
+      <div class="ap-badges">
+        <span class="ap-badge ap-high">HIGH</span>
+        <span class="ap-badge ap-medium">MEDIUM</span>
+        <span class="ap-badge ap-low">LOW</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instapvoorbeelden -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-bar" style="background:#3B82F6"></div>
+      <h2 class="section-title">Instapvoorbeelden</h2>
+    </div>
+
+    <div class="example" style="border-left-color:#DC2626">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Bout komt los door trillingen</div>
+          <div class="example-desc">Onderdeel valt af, machine stopt</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">192</div></div>
+          <div class="score-box ap" style="background:#FEE2E2;min-width:60px"><label style="color:#DC2626">AP</label><div class="value" style="color:#DC2626">High</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">8</div><div class="desc">Machine-uitval</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">4</div><div class="desc">Regelmatig zonder borgmiddel</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">6</div><div class="desc">Niet zichtbaar tot falen</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#DC2626">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Sensor geeft foutieve meting door vervuiling</div>
+          <div class="example-desc">Verkeerde aansturing, product afkeur</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">175</div></div>
+          <div class="score-box ap" style="background:#FEE2E2;min-width:60px"><label style="color:#DC2626">AP</label><div class="value" style="color:#DC2626">High</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">7</div><div class="desc">Productafkeur</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">5</div><div class="desc">Ophoping over tijd</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">5</div><div class="desc">Periodieke kalibratie</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#059669">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Label zit scheef op product</div>
+          <div class="example-desc">Alleen visueel, geen functie-impact</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">8</div></div>
+          <div class="score-box ap" style="background:#D1FAE5;min-width:60px"><label style="color:#059669">AP</label><div class="value" style="color:#059669">Low</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">2</div><div class="desc">Cosmetisch</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">4</div><div class="desc">Handmatige variatie</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">1</div><div class="desc">Direct zichtbaar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Medtech -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-bar" style="background:#8B5CF6"></div>
+      <h2 class="section-title">Medtech</h2>
+    </div>
+
+    <div class="example" style="border-left-color:#DC2626">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Infuuspomp doseert verkeerde hoeveelheid medicatie</div>
+          <div class="example-desc">Direct patiëntgevaar, mogelijk fataal</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">100</div></div>
+          <div class="score-box ap" style="background:#FEE2E2;min-width:60px"><label style="color:#DC2626">AP</label><div class="value" style="color:#DC2626">High</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">10</div><div class="desc">Fataal risico</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">2</div><div class="desc">Zeldzaam</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">5</div><div class="desc">Geen alarm bij kleine afwijking</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#DC2626">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Sterilisatie-indicator toont vals-positief</div>
+          <div class="example-desc">Infectierisico kan levensbedreigend zijn</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">135</div></div>
+          <div class="score-box ap" style="background:#FEE2E2;min-width:60px"><label style="color:#DC2626">AP</label><div class="value" style="color:#DC2626">High</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">9</div><div class="desc">Levensbedreigend</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">3</div><div class="desc">Incidenteel</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">5</div><div class="desc">Secundaire controle beperkt</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#D97706">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Batterij ontlaadt sneller dan gespecificeerd</div>
+          <div class="example-desc">Uitval tijdens kritieke meting</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">42</div></div>
+          <div class="score-box ap" style="background:#FEF3C7;min-width:60px"><label style="color:#D97706">AP</label><div class="value" style="color:#D97706">Medium</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">7</div><div class="desc">Behandeling verstoord</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">3</div><div class="desc">Bij veroudering</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">2</div><div class="desc">Niveau zichtbaar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Productie -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-bar" style="background:#F59E0B"></div>
+      <h2 class="section-title">Productie</h2>
+    </div>
+
+    <div class="example" style="border-left-color:#DC2626">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Lasverbinding onvoldoende penetratie</div>
+          <div class="example-desc">Structureel falen, veiligheidsrisico</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">180</div></div>
+          <div class="score-box ap" style="background:#FEE2E2;min-width:60px"><label style="color:#DC2626">AP</label><div class="value" style="color:#DC2626">High</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">9</div><div class="desc">Veiligheidsrisico</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">4</div><div class="desc">Bij operatorwissel</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">5</div><div class="desc">Vereist destructieve test</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#D97706">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Verkeerde torque bij kritische bevestiging</div>
+          <div class="example-desc">Losraken tijdens gebruik, functieverlies</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">112</div></div>
+          <div class="score-box ap" style="background:#FEF3C7;min-width:60px"><label style="color:#D97706">AP</label><div class="value" style="color:#D97706">Medium</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">7</div><div class="desc">Functieverlies</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">4</div><div class="desc">Gedocumenteerd proces</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">4</div><div class="desc">Steekproef controle</div></div>
+      </div>
+    </div>
+
+    <div class="example" style="border-left-color:#059669">
+      <div class="example-header">
+        <div>
+          <div class="example-title">Verpakkingsfolie niet strak aangebracht</div>
+          <div class="example-desc">Cosmetisch, geen productschade</div>
+        </div>
+        <div class="example-scores">
+          <div class="score-box rpn"><label>RPN</label><div class="value">10</div></div>
+          <div class="score-box ap" style="background:#D1FAE5;min-width:60px"><label style="color:#059669">AP</label><div class="value" style="color:#059669">Low</div></div>
+        </div>
+      </div>
+      <div class="sod-grid">
+        <div class="sod-item"><label>Severity</label><div class="value">2</div><div class="desc">Cosmetisch</div></div>
+        <div class="sod-item"><label>Occurrence</label><div class="value">5</div><div class="desc">Handmatige lijn</div></div>
+        <div class="sod-item"><label>Detection</label><div class="value">1</div><div class="desc">Direct zichtbaar</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-left">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="28" height="28" style="flex-shrink:0;border-radius:4px;">
+        <defs><linearGradient id="vg2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ffffff"/><stop offset="100%" style="stop-color:#14b8a6"/>
+        </linearGradient></defs>
+        <rect width="800" height="800" fill="#0a0f1a"/>
+        <path d="M150 150 L400 650 L650 150 L550 150 L400 450 L250 150 Z" fill="url(#vg2)"/>
+      </svg>
+      <div class="footer-divider"></div>
+      <div>
+        <div class="footer-name">V-Lab Digital</div>
+        <div class="footer-slogan">Smart Manufacturing Solutions</div>
+      </div>
+    </div>
+    <div class="footer-right">
+      <div>Brainport Eindhoven</div>
+      <div>© 2025 V-Lab Digital</div>
+    </div>
+  </div>
+
+</body>
+</html>
